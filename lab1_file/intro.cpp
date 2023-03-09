@@ -1,7 +1,7 @@
 #include "intro.h"
 
 void intro() {
-    cout << endl << endl << "In this program you can create a txt file, in which you will enter words seperated by comas only." << endl;
+    cout << endl << "In this program you can create a txt file, in which you will enter words seperated by comas only." << endl;
     cout << "The task of this program is to find and reshape a substring you entered in created txt file." << endl;
     cout << "For example you entered text: time timeless sleep food continue." << endl;
     cout << "And you entered a substring: ti." << endl;
@@ -11,5 +11,5 @@ void intro() {
     cout << "This program works in two modes:" << endl;
     cout << "1) FilePointer" << endl;
     cout << "2) FileStream" << endl;
-    cout << "print [-mode FilePointer | -mode FileStream | -mode ProgramDetails]" << endl;
+    cout << "print [-mode FilePointer | -mode FileStream | -mode Intro]" << endl << endl;
 }
