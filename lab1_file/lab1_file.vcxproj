@@ -131,14 +131,16 @@
     <ClCompile Include="choice2.cpp" />
     <ClCompile Include="file_pointer.cpp" />
     <ClCompile Include="file_stream.cpp" />
+    <ClCompile Include="intro.cpp" />
     <ClCompile Include="print_msg.cpp" />
-    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="choice1.h" />
     <ClInclude Include="choice2.h" />
     <ClInclude Include="file_pointer.h" />
     <ClInclude Include="file_stream.h" />
+    <ClInclude Include="intro.h" />
     <ClInclude Include="print_msg.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

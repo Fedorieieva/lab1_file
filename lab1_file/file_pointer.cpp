@@ -44,13 +44,13 @@ void write_file_ptr(char* filename, char* contents, int num) {
         fopen_s(&file, filename, "w");
     }
     if (file == nullptr) {
-        printf("cannot open this file\n");
+        cerr << "Error opening this file" << endl;
         return;
     }
     fputs(contents, file);
     fputs(" ", file);
     if (fclose(file) == EOF) {
-        printf("error closing file");
+        cerr << "Error closing file" << endl;
         return;
     }
 }
@@ -59,7 +59,7 @@ char* read_file_ptr(char* filename) {
     FILE* file;
     fopen_s(&file, filename, "r");
     if (file == nullptr) {
-        printf("cannot open this file\n");
+        cerr << "Error opening this file" << endl;
         return nullptr;
     }
     fseek(file, 0, SEEK_END);
@@ -69,11 +69,11 @@ char* read_file_ptr(char* filename) {
     fread(arr, sizeof(char), file_size, file);
     arr[file_size] = '\0';
     if (ferror(file)) {
-        printf("error reading from file\n");
+        cerr << "Error reading from file" << endl;
         return nullptr;
     }
     if (fclose(file) == EOF) {
-        printf("error closing file");
+        cerr << "Error closing file" << endl;
         return nullptr;
     }
     return arr;
