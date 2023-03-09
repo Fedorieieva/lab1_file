@@ -12,26 +12,22 @@ void enter_filename_or_substr(char* str) {
     str[size] = '\0';
 }
 
-void increase_memory(int size, int& capacity, char* arr) {
-    if (size == capacity) {
-        capacity *= 2;
-        char* temp = new char[capacity];
-        for (int i = 0; i < size; i++) {
-            temp[i] = arr[i];
-        }
-        delete[] arr;
-        arr = temp;
-    }
-}
-
 char* arr_input_ptr() {
-    int capacity = 10, size = 0;
-    char* arr = new char[capacity];
+    int capacity = 256, size = 0;
+    char* arr = (char*)calloc(capacity, sizeof(char));
     char c;
     cout << "Enter text for the file (words should be separated by spaces only):" << endl;
     while (cin.get(c)) {
         if (c == '\n') break;
-        increase_memory(size, capacity, arr);
+        if (size == capacity) {
+            capacity *= 2;
+            char* temp = (char*)calloc(capacity, sizeof(char));
+            for (int i = 0; i < size; i++) {
+                temp[i] = arr[i];
+            }
+            free(arr);
+            arr = temp;
+        }
         arr[size] = c;
         size++;
     }
@@ -69,7 +65,7 @@ char* read_file_ptr(char* filename) {
     fseek(file, 0, SEEK_END);
     int file_size = ftell(file);
     fseek(file, 0, SEEK_SET);
-    char* arr = new char[file_size];
+    char* arr = (char*)calloc(file_size, sizeof(char));
     fread(arr, sizeof(char), file_size, file);
     arr[file_size] = '\0';
     if (ferror(file)) {
@@ -128,7 +124,7 @@ int count_len_occ(char* contents, char* substr) {
 }
 
 void change_substr(char* substr, char* new_substr, int num) {
-    char* str_num = new char[count_digits(num) + 1];
+    char* str_num = (char*)calloc(count_digits(num) + 1, sizeof(char));
     new_substr[0] = '[';
     int i = 1;
     while (i <= strlen(substr) + 1) {
@@ -147,12 +143,12 @@ void change_substr(char* substr, char* new_substr, int num) {
     }
     new_substr[i] = ']';
     new_substr[i + 1] = '\0';
-    delete[] str_num;
+    free(str_num);
 }
 
 void swap_n_str(char* substr, char* new_substr, int num) {
     int k = 0, num_size = count_digits(num);
-    char* str_num = new char[num_size + 1];
+    char* str_num = (char*)calloc(num_size + 1, sizeof(char));
     sprintf_s(str_num, count_digits(num) + 1, "%d", num);
     for (int i = 0; i < num_size; i++) {
         new_substr[i] = str_num[i];
@@ -165,7 +161,7 @@ void swap_n_str(char* substr, char* new_substr, int num) {
         new_substr[i] = substr[k];
         k++;
     }
-    delete[] str_num;
+    free(str_num);
 }
 
 char* find_substr_ptr(char* contents, char* substr, int& count, int num) {
@@ -178,8 +174,8 @@ char* find_substr_ptr(char* contents, char* substr, int& count, int num) {
     size_t new_len_sub = ((strlen(substr) + 3) * count_substr_ptr(contents, substr)) + count_len_occ(contents, substr);
     size_t change_con_len = strlen(contents) + new_len_sub;
     size_t i = 0, j = 0;
-    char* arr = new char[change_con_len + 1];
-    char* new_substr = new char[strlen(substr) + count_len_occ(contents, substr) + 3];
+    char* arr = (char*)calloc(change_con_len + 2, sizeof(char));
+    char* new_substr = (char*)calloc((strlen(substr) + count_len_occ(contents, substr) + 4), sizeof(char));
     while (i < strlen(contents)) {
         if (strstr(&contents[i], substr) == &contents[i]) {
             if (num == 1 || num == 3) {
@@ -200,7 +196,7 @@ char* find_substr_ptr(char* contents, char* substr, int& count, int num) {
             j++;
         }
     }
-    delete[] new_substr;
+    free(new_substr);
     arr[j] = '\0';
     return arr;
 }

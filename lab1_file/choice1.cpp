@@ -4,7 +4,7 @@
 
 void choice1() {
     char filename[25];
-    char filename3[45] = "file2_";
+    char filename3[45] = "file3_";
     char substr_ptr[10];
     int count = 0, ch;
 
@@ -51,12 +51,12 @@ void choice1() {
         print_contents_file_ptr(contents4, 0);
         write_file_ptr(filename, contents4, 1);
 
-        delete[] contents2;
-        delete[] contents3;
-        delete[] contents4;
+        free(contents2);
+        free(contents3);
+        free(contents4);
     }
-    delete[] contents;
-    delete[] file_contents;
-    delete[] file_contents2;
-    delete[] file_contents3;
+    free(contents);
+    //free(file_contents);
+    free(file_contents2);
+    //free(file_contents3);
 }

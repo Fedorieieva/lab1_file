@@ -6,7 +6,6 @@
 using namespace std;
 
 void enter_filename_or_substr(char* str);
-void increase_memory(int size, int& capacity, char* arr);
 char* arr_input_ptr();
 void write_file_ptr(char* filename, char* contents, int num);
 char* read_file_ptr(char* filename);
