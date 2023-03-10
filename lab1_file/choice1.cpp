@@ -50,12 +50,5 @@ void choice1() {        //FilePointer mode
         print_contents_file_ptr(contents4, 0);  //print appended file contents
         write_file_ptr(filename, contents4, 1);  //write input to file
 
-        free(contents2);
-        free(contents3);
-        free(contents4);
     }
-    free(contents);
-    //free(file_contents);
-    free(file_contents2);
-    //free(file_contents3);
 }
